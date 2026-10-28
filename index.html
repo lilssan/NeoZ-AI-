@@ -67,10 +67,20 @@
     };
   </script>
 
-  <!-- React 18, ReactDOM 18 & Babel Standalone CDNs -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- React 18, ReactDOM 18 & Babel Standalone CDNs (Cloudflare CDN with unpkg fallback) -->
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js"></script>
+  <script>
+    // Fallback in case cdnjs is blocked
+    if (!window.React) {
+      document.write('<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>');
+      document.write('<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>');
+    }
+    if (!window.Babel) {
+      document.write('<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>');
+    }
+  </script>
 
   <style>
     html {
@@ -118,7 +128,23 @@
   </style>
 </head>
 <body class="bg-[#0f131c] text-[#dfe2ef]">
-  <div id="root"></div>
+  <div id="root">
+    <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #0f131c; color: #dfe2ef; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+      <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #571bc1, #00f0ff); padding: 2px; box-shadow: 0 0 25px rgba(0, 240, 255, 0.4); margin-bottom: 20px;">
+        <div style="width: 100%; height: 100%; border-radius: 10px; background: #0a0e17; display: flex; align-items: center; justify-content: center;">
+          <svg style="width: 20px; height: 20px; color: #00f0ff;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16l-10 16h10" />
+          </svg>
+        </div>
+      </div>
+      <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #00f0ff; margin-bottom: 8px;">
+        NeoZ AI
+      </div>
+      <div style="font-size: 12px; color: #849495; letter-spacing: 0.04em;">
+        Initializing Cognitive Engine...
+      </div>
+    </div>
+  </div>
 
   <!-- Inlined, Self-Contained React Application -->
   <script type="text/babel">
